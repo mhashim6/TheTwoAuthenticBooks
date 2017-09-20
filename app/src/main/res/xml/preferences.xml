@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+				  android:title="@string/title_activity_settings">
+
+	<PreferenceCategory
+		android:key="appearance_settings"
+		android:title="@string/appearance">
+
+		<CheckBoxPreference
+			android:defaultValue="false"
+			android:key="arabic_key"
+			android:summary="@string/language_summary"
+			android:title="@string/force_arabic"/>
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="search_settings"
+		android:title="@string/search_settings">
+
+		<ListPreference
+			android:defaultValue="50"
+			android:entries="@array/limit_entries"
+			android:entryValues="@array/limit_values"
+			android:key="limit_key"
+			android:summary="@string/results_limit_summary"
+			android:title="@string/results_limit_title"
+			/>
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		android:key="general_settings"
+		android:title="@string/general">
+
+	</PreferenceCategory>
+	<Preference android:title="@string/about">
+		<intent
+			android:action="alsahihan.about.action"
+			/>
+	</Preference>
+	<CheckBoxPreference
+		android:defaultValue="true"
+		android:key="update_key"
+		android:title="@string/update_preference"
+		/>
+</PreferenceScreen>

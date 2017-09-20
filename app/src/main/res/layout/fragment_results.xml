@@ -1,0 +1,12 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 xmlns:tools="http://schemas.android.com/tools"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent"
+			 tools:context="mhashim6.android.thetwoauthentics.app.results.ResultsFragment">
+
+
+	<include
+		android:id="@+id/recycler_view"
+		layout="@layout/recycler_view"/>
+
+</FrameLayout>

@@ -1,0 +1,51 @@
+<resources>
+	<string name="app_name" translatable="false">الصحيحان</string>
+	<string name="search_hint_text">Search…</string>
+	<string name="saved_title">Saved Hadiths</string>
+	<string name="share_with">Share Hadith</string>
+	<string name="sahih_muslim">Sahih Muslim</string>
+	<string name="sahih_albukhari">Sahih Al-Bukhari</string>
+	<string name="saved">Saved</string>
+	<string name="undo_string">undo</string>
+	<string name="no_results">No matches found in</string>
+	<string name="sunnah_search">Search on sunnah.com</string>
+	<string name="copy">Copy</string>
+	<string name="share">Share</string>
+	<string name="lookup">Elaborate</string>
+	<string name="save">Save</string>
+	<string name="remove">Remove</string>
+	<string name="about">About Application</string>
+	<string name="xda" translatable="false">SUPPORT AND HELP FORUM</string>
+	<string name="licenses" translatable="false">OPEN SOURCE LIBRARIES AND CONTRIBUTIONS</string>
+	<string name="copyright" translatable="false">COPYRIGHT © 2017 Muhammad Hashim(mhashim6)</string>
+	<string name="update_available">Update Available</string>
+	<string name="update_advice">A newer version for the application is available.</string>
+	<string name="update_now">Update now</string>
+	<string name="update_later">Later</string>
+	<string name="title_activity_settings">Preferences</string>
+	<string name="appearance">Appearance</string>
+	<string name="general">General</string>
+	<string name="force_arabic">Arabic Mode</string>
+	<string name="empty_saved">You haven\'t saved any Hadith, yet.</string>
+	<string name="language_summary">User Interface will always use Arabic language</string>
+	<string name="donate" translatable="false">donate</string>
+	<string name="thanks">Thanks</string>
+	<string name="update_preference">Check for Updates</string>
+	<string name="trim_summary">Automatically trims extra spaces from the query</string>
+	<string name="search_settings">Searching</string>
+	<string name="results_limit_title">Maximum results limit</string>
+	<string name="results_limit_summary">Sets the maximum number of results</string>
+	<string name="rate">Feedback</string>
+	<string name="both">Both Books</string>
+	<string name="translate">Translate</string>
+	<string name="removed">Removed</string>
+	<string name="confirm">Are You sure?</string>
+	<string name="yes">Yes!</string>
+	<string name="rate_dialog_title">Rate this app</string>
+	<string name="rate_dialog_message">
+If you like this app, please Share it with your friends, spend a minute to write a nice review or to give it a 5-star rating in Google Play. May Allah reward us all. </string>
+	<string name="rate_dialog_ok">Rate Now</string>
+	<string name="rate_dialog_cancel">Later</string>
+	<string name="rate_dialog_no">No, Thanks</string>
+	<string name="search_guide">- You can search for exact phrases using quotes \" \".\n\n- Search for multiple words and phrases by any order.</string>
+</resources>

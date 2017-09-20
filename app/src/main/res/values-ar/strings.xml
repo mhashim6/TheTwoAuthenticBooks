@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="about">عن التطبيق</string>
+	<string name="appearance">واجهة التطبيق</string>
+	<string name="force_arabic">اللغة العربية</string>
+	<string name="copy">نسخ</string>
+	<string name="saved">تم الحفظ</string>
+	<string name="empty_saved">أنت لم تحفظ أي حديثٍ بعد</string>
+	<string name="general">إعدادات عامة</string>
+	<string name="lookup">شرح</string>
+	<string name="no_results">لا تُوجد نتائج لهذا النص في</string>
+	<string name="remove">حذف</string>
+	<string name="sahih_albukhari">صحيح البخاري</string>
+	<string name="sahih_muslim">صحيح مسلم</string>
+	<string name="both">البخاري ومسلم</string>
+	<string name="save">حفظ</string>
+	<string name="saved_title">الأحاديث المحفوظة</string>
+	<string name="search_hint_text">ابحث…</string>
+	<string name="share">مشاركة</string>
+	<string name="share_with">شارك الحديث</string>
+	<string name="title_activity_settings">الإعدادات</string>
+	<string name="update_advice">يوجد تحديثٌ جديدٌ لتطبيق الصحيحان.</string>
+	<string name="update_available">تحديثٌ جديد</string>
+	<string name="update_later">لاحقاً</string>
+	<string name="update_now">تحديث الآن</string>
+	<string name="language_summary">استخدم اللغة العربية دائماً، بغض النظر عن لغة الجهاز</string>
+	<string name="undo_string">تراجع</string>
+	<string name="thanks">شكراً</string>
+	<string name="update_preference">البحث عن التحديثات</string>
+	<string name="results_limit_summary">أقصى عدد من النتائج يمكن إظهاره</string>
+	<string name="results_limit_title">الحد الأقصى للنتائج</string>
+	<string name="search_settings">إعدادات البحث</string>
+	<string name="trim_summary">حذف المسافات الزائدة في البحث المطابق تلقائياً</string>
+	<string name="sunnah_search">بحث في sunnah.com</string>
+	<string name="rate">شارك برأيك</string>
+	<string name="translate">ترجمة</string>
+	<string name="removed">تم الحذف</string>
+	<string name="confirm">هل أنت متأكد؟</string>
+	<string name="yes">نعم!</string>
+	<string name="rate_dialog_title">تقييم التطبيق</string>
+	<string name="rate_dialog_message">إن أعجبك التطبيق، فضلاً شاركه مع من تحب، او قم بتقييم التطبيق، وفي ميزان حسناتكم وإيانا بإذن الله.</string>
+	<string name="rate_dialog_ok">تقييم الآن</string>
+	<string name="rate_dialog_cancel">لاحقاً</string>
+	<string name="rate_dialog_no">لا، شكراً</string>
+	<string name="search_guide">- يمكنك البحث عن جُملٍ مطابقة بوضعها بين علامتي تنصيص \" \".\n\n- يمكنك البحث عن أي عدد من الكلمات او الجُمل بأي ترتيب.</string>
+</resources>

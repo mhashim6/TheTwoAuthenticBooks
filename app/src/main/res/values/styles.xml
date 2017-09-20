@@ -1,0 +1,30 @@
+<resources>
+
+	<!-- Base application theme. -->
+	<style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+		<!-- Customize your theme here. -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<item name="android:windowBackground">@drawable/background</item>
+	</style>
+
+	<!-- Splash screen. -->
+	<style name="SplashTheme" parent="AppTheme.NoActionBar">
+		<item name="android:windowBackground">@drawable/splash</item>
+	</style>
+
+	<!-- Settings theme. -->
+	<style name="SettingsTheme" parent="AppTheme.NoActionBar">
+		<item name="colorAccent">@color/colorPrimaryLight</item>
+	</style>
+
+	<!-- Toolbar. -->
+	<style name="ToolbarTheme" parent="AppTheme.NoActionBar">
+		<item name="android:textColorSecondary">@color/offwhite</item>
+	</style>
+
+	<style name="ToolbarTitle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+		<item name="android:textSize">20sp</item>
+	</style>
+</resources>

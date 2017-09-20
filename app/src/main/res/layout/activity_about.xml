@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:layout_gravity="center"
+	android:baselineAligned="false"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/toolbar"
+		layout="@layout/toolbar"/>
+
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:layout_marginBottom="20dp"
+		android:orientation="vertical">
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center|top"
+			android:layout_marginTop="15dp"
+			android:src="@mipmap/ic_launcher_round"
+			tools:ignore="ContentDescription"/>
+
+		<android.support.v7.widget.AppCompatTextView
+			android:id="@+id/version_textView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginBottom="5dp"
+			tools:text="v1.3.5.0"/>
+
+	</LinearLayout>
+
+
+		<LinearLayout
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="10dp"
+			android:paddingTop="10dp">
+
+			<android.support.v7.widget.AppCompatButton
+				android:id="@+id/xda_btn"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:text="@string/xda"/>
+
+			<android.support.v7.widget.AppCompatButton
+				android:id="@+id/credits_btn"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:text="@string/licenses"
+				/>
+			<android.support.v7.widget.AppCompatButton
+				android:id="@+id/donate_btn"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp"
+				android:layout_marginRight="10dp"
+				android:text="@string/donate"
+				/>
+		</LinearLayout>
+
+
+	<android.support.v7.widget.AppCompatTextView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:gravity="center|bottom"
+		android:paddingBottom="5dp"
+		android:text="@string/copyright"
+		android:textAlignment="center"
+		android:textSize="12sp"
+		/>
+</LinearLayout>
+
