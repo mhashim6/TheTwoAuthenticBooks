@@ -40,6 +40,7 @@ public class MainActivity extends BaseActivity {
 	private int[] muhaddithin;
 
 	private String lastQuery;
+	private int limit = 50;
 //===================================================
 
 	@Override
@@ -55,6 +56,17 @@ public class MainActivity extends BaseActivity {
 
 		initSpinner();
 		initSearchView();
+	}
+//===================================================
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		Utils.WORKERS.execute(() -> {
+			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+			String limitString = preferences.getString("limit_key", "50");
+			limit = Integer.parseInt(limitString);
+		});
 	}
 //===================================================
 
@@ -208,9 +220,6 @@ public class MainActivity extends BaseActivity {
 
 		private void search(final String query) {
 			lastQuery = query;
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-			String limitString = preferences.getString("limit_key", "50");
-			int limit = Integer.parseInt(limitString);
 
 			ResultsWrapper results = databasesLogic.search(query, muhaddithin, limit);
 			if (!results.isEmpty())

@@ -320,10 +320,10 @@ public final class Utils {
 	}
 
 	private static Set<Integer> getUniqueRandoms(int k) {
-		final Random RANDOM = new Random();
+		final Random RND = new Random();
 		final Set<Integer> picked = new HashSet<>();
 		while (picked.size() < 32) {
-			picked.add(RANDOM.nextInt(k + 1));
+			picked.add(RND.nextInt(k + 1));
 		}
 		return picked;
 	}
