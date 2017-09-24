@@ -8,7 +8,7 @@
 	<string name="empty_saved">أنت لم تحفظ أي حديثٍ بعد</string>
 	<string name="general">إعدادات عامة</string>
 	<string name="lookup">شرح</string>
-	<string name="no_results">لا تُوجد نتائج لهذا النص في</string>
+	<string name="no_results">لا تُوجد نتائج لهذا النص في الصحيحين.</string>
 	<string name="remove">حذف</string>
 	<string name="sahih_albukhari">صحيح البخاري</string>
 	<string name="sahih_muslim">صحيح مسلم</string>
@@ -42,5 +42,5 @@
 	<string name="rate_dialog_ok">تقييم الآن</string>
 	<string name="rate_dialog_cancel">لاحقاً</string>
 	<string name="rate_dialog_no">لا، شكراً</string>
-	<string name="search_guide">- يُمكنك البحث عن نصوص مطابقة بوضعها بين علامتي التنصيص \" \".\n\n- يُمكنك البحث عن أي عدد من الكلمات أو النصوص بأي ترتيب.</string>
+	<string name="search_guide">- يُمكن البحث عن نصوص مطابقة بوضعها بين علامتي التنصيص \"\".\n\n- يُمكن البحث عن أي عدد من الكلمات أو النصوص بأي ترتيب.\n\n- عدد الأحاديث في صحيح البخاري ٧٠٠٨ حديث.\n\n- عدد الأحاديث في صحيح مسلم ٥٣٦٢ حديث.</string>
 </resources>

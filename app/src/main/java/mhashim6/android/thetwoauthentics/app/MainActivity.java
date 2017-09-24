@@ -9,14 +9,11 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
-import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import com.github.javiersantos.appupdater.AppUpdater;
 import com.github.javiersantos.appupdater.enums.Display;
@@ -24,23 +21,19 @@ import com.github.javiersantos.appupdater.enums.UpdateFrom;
 
 import mhashim6.android.thetwoauthentics.R;
 import mhashim6.android.thetwoauthentics.app.results.ResultsWrapper;
-import mhashim6.android.thetwoauthentics.model.Muhaddith;
 
 import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.RESULTS;
 import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.SAVED;
 
 public class MainActivity extends BaseActivity {
 
-	private AppCompatSpinner muhaddithinSpinner;
-
 	private SearchView searchView;
 	private AppCompatImageButton searchBtn;
 
 	private DatabasesLogic databasesLogic;
-	private int[] muhaddithin;
 
 	private String lastQuery;
-	private int limit = 50;
+	private int limit = 25;
 //===================================================
 
 	@Override
@@ -54,7 +47,7 @@ public class MainActivity extends BaseActivity {
 
 		initToolBar(null, false);
 
-		initSpinner();
+		//	initSpinner();
 		initSearchView();
 	}
 //===================================================
@@ -65,35 +58,7 @@ public class MainActivity extends BaseActivity {
 		Utils.WORKERS.execute(() -> {
 			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
 			String limitString = preferences.getString("limit_key", "50");
-			limit = Integer.parseInt(limitString);
-		});
-	}
-//===================================================
-
-	private void initSpinner() {
-		muhaddithinSpinner = findViewById(R.id.muhaddithin_spinner);
-		muhaddithinSpinner.setAdapter(new ArrayAdapter<>(this,
-				android.R.layout.simple_spinner_dropdown_item,
-				new String[]{getResources().getString(R.string.sahih_albukhari), getResources().getString(R.string.sahih_muslim), getResources().getString(R.string.both)}));
-		muhaddithinSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				switch (position) {
-					case 0:
-						muhaddithin = new int[]{Muhaddith.ALBUKHARI};
-						break;
-					case 1:
-						muhaddithin = new int[]{Muhaddith.MUSLIM};
-						break;
-					case 2:
-						muhaddithin = new int[]{Muhaddith.ALBUKHARI, Muhaddith.MUSLIM};
-						break;
-				}
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
+			limit = Integer.parseInt(limitString) / 2;
 		});
 	}
 //===================================================
@@ -192,7 +157,6 @@ public class MainActivity extends BaseActivity {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm != null)
 			imm.hideSoftInputFromWindow(searchView.getWindowToken(), 0);
-
 	}
 //===================================================
 
@@ -221,7 +185,7 @@ public class MainActivity extends BaseActivity {
 		private void search(final String query) {
 			lastQuery = query;
 
-			ResultsWrapper results = databasesLogic.search(query, muhaddithin, limit);
+			ResultsWrapper results = databasesLogic.search(query, limit);
 			if (!results.isEmpty())
 				Utils.startResultsActivity(MainActivity.this, RESULTS);
 			else
@@ -229,10 +193,8 @@ public class MainActivity extends BaseActivity {
 		}
 
 		private void yellAtUser() {
-			Snackbar sb = makeSnackBar(String.format("%s %s.", getResources().getString(R.string.no_results), muhaddithinSpinner.getSelectedItem().toString()));
-			if (muhaddithin.length > 1)
-				sb.setAction(R.string.sunnah_search, v -> Utils.webSearchQuery(MainActivity.this, lastQuery));
-
+			Snackbar sb = makeSnackBar(getResources().getString(R.string.no_results));
+			sb.setAction(R.string.sunnah_search, v -> Utils.webSearchQuery(MainActivity.this, lastQuery));
 			sb.show();
 		}
 	}
@@ -255,5 +217,4 @@ public class MainActivity extends BaseActivity {
 			progressBar.setVisibility(View.INVISIBLE);
 		}
 	}
-
 }

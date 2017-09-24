@@ -7,7 +7,7 @@
 	<string name="sahih_albukhari">Sahih Al-Bukhari</string>
 	<string name="saved">Saved</string>
 	<string name="undo_string">undo</string>
-	<string name="no_results">No matches found in</string>
+	<string name="no_results">No matches found in Both Books.</string>
 	<string name="sunnah_search">Search on sunnah.com</string>
 	<string name="copy">Copy</string>
 	<string name="share">Share</string>
@@ -16,7 +16,7 @@
 	<string name="remove">Remove</string>
 	<string name="about">About Application</string>
 	<string name="xda" translatable="false">SUPPORT AND HELP FORUM</string>
-	<string name="licenses" translatable="false">OPEN SOURCE LIBRARIES AND CONTRIBUTIONS</string>
+	<string name="licenses" translatable="false">OPEN SOURCE LIBRARIES</string>
 	<string name="copyright" translatable="false">COPYRIGHT © 2017 Muhammad Hashim(mhashim6)</string>
 	<string name="update_available">Update Available</string>
 	<string name="update_advice">A newer version for the application is available.</string>
@@ -47,5 +47,5 @@ If you like this app, please Share it with your friends, spend a minute to write
 	<string name="rate_dialog_ok">Rate Now</string>
 	<string name="rate_dialog_cancel">Later</string>
 	<string name="rate_dialog_no">No, Thanks</string>
-	<string name="search_guide">- You can search for exact phrases using quotes \" \".\n\n- Search for multiple words and phrases by any order.</string>
+	<string name="search_guide">- Search for multiple words and phrases by any order.\n\n- Search for exact phrases using quotes \"\".\n\n- Sahih Al-Bukhari contains 7008 Hadiths.\n\n- Sahih Muslim contains 5362 Hadiths.</string>
 </resources>

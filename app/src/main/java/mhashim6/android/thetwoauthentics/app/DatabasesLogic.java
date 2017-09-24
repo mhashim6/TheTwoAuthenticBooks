@@ -59,7 +59,7 @@ public class DatabasesLogic {
 //===================================================
 
 	public final ResultsWrapper getSavedAhadith() {
-		int[] savedNumbers = savedAccess.getAllSavedAhadith();
+		int[] savedNumbers = savedAccess.getAllSavedAhadithIndexes();
 		if (savedNumbers.length == 0) return ResultsHolder.EMPTY_RESULTS;
 
 		ArrayList<Integer> bukhariSaved = new ArrayList<>();
@@ -88,15 +88,13 @@ public class DatabasesLogic {
 			bukhari.addAll(bukhariFuture.get());
 			muslim.addAll(muslimFuture.get());
 
-		} catch (InterruptedException e) {
+		} catch (InterruptedException | ExecutionException e) {
 			//unlikely
-		} catch (ExecutionException e) {
-			//unlikely
+		} finally {
+			ResultsWrapper saved = new ResultsWrapper(bukhari, muslim, null, NO_SEARCH_TYPE);
+			ResultsHolder.getInstance().setSaved(saved);
+			return saved;
 		}
-
-		ResultsWrapper saved = new ResultsWrapper(bukhari, muslim, null, NO_SEARCH_TYPE);
-		ResultsHolder.getInstance().setSaved(saved);
-		return saved;
 	}
 
 	public final void saveHadith(Hadith hadith) {
@@ -108,7 +106,7 @@ public class DatabasesLogic {
 	}
 //===================================================
 
-	public final ResultsWrapper search(String query, final int[] muhaddithin, int limit) {
+	public final ResultsWrapper search(String query, int limit) {
 
 		query = Utils.cleanQuery(query);
 		String queryToSearch = Utils.formatQuery(query);
@@ -118,27 +116,15 @@ public class DatabasesLogic {
 		final List<Hadith> muslim = new ArrayList<>();
 
 		try {
-			if (muhaddithin.length > 1) {
-				Future<List<Hadith>> bukhariFuture = WORKERS.submit(
-						new SearchingCallable(ALBUKHARI, queryArray, limit));
+			Future<List<Hadith>> bukhariFuture = WORKERS.submit(
+					() -> ALBUKHARI.findAhadithByStringKeys(limit, queryArray));
 
-				Future<List<Hadith>> muslimFuture = WORKERS.submit(
-						new SearchingCallable(MUSLIM, queryArray, limit));
+			Future<List<Hadith>> muslimFuture = WORKERS.submit(
+					() -> MUSLIM.findAhadithByStringKeys(limit, queryArray));
 
-				bukhari.addAll(bukhariFuture.get());
-				muslim.addAll(muslimFuture.get());
+			bukhari.addAll(bukhariFuture.get());
+			muslim.addAll(muslimFuture.get());
 
-			} else {
-				switch (muhaddithin[0]) {
-					case Muhaddith.ALBUKHARI:
-						bukhari.addAll(ALBUKHARI.findAhadithByStringKeys(limit, queryArray));
-						break;
-
-					case Muhaddith.MUSLIM:
-						muslim.addAll(MUSLIM.findAhadithByStringKeys(limit, queryArray));
-						break;
-				}
-			}
 		} catch (InterruptedException e) {
 			//unlikely
 		} catch (ExecutionException e) {
@@ -151,24 +137,6 @@ public class DatabasesLogic {
 		return results;
 	}
 //===================================================
-
-	private static final class SearchingCallable implements Callable<List<Hadith>> {
-
-		private final Muhaddith muhaddith;
-		private final String[] query;
-		private final int limit;
-
-		SearchingCallable(Muhaddith muhaddith, String[] query, int limit) {
-			this.muhaddith = muhaddith;
-			this.query = query;
-			this.limit = limit;
-		}
-
-		@Override
-		public List<Hadith> call() throws Exception {
-			return muhaddith.findAhadithByStringKeys(limit, query);
-		}
-	}
 
 	private static final class SavedCallable implements Callable<List<Hadith>> {
 

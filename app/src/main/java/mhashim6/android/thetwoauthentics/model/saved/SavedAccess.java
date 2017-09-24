@@ -21,6 +21,8 @@ public final class SavedAccess {
 
 	private static SavedAccess instance = null;
 	private static final String TAG = "SAVE";
+
+	private static final String SELECT_FROM = "SELECT %s FROM %s";
 //===================================================
 
 	private SavedAccess(Context context) {
@@ -45,10 +47,10 @@ public final class SavedAccess {
 		openHelper.close();
 	}
 
-	public int[] getAllSavedAhadith() {
+	public int[] getAllSavedAhadithIndexes() {
 		int[] ahadith;
 
-		Cursor cursor = database.rawQuery(String.format("SELECT %s FROM %s", SavedOpenHelper.NUMBER_COL, SavedOpenHelper.TABLE_SAVED), null);
+		Cursor cursor = database.rawQuery(String.format(SELECT_FROM, SavedOpenHelper.NUMBER_COL, SavedOpenHelper.TABLE_SAVED), null);
 		cursor.moveToFirst();
 
 		ahadith = new int[cursor.getCount()];
