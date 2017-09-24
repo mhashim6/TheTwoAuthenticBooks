@@ -10,7 +10,7 @@ public class SettingsActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		initToolBar(null,true);
+		initToolBar(getResources().getString(R.string.preferences), true);
 		getFragmentManager().beginTransaction().replace(R.id.settingsActivity, new SettingsFragment()).commit();
 	}
 //===================================================

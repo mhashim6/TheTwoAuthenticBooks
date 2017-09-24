@@ -32,18 +32,16 @@ import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.MAIN
 
 class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolder> {
 
-	private final DatabasesLogic DATABASES_MANAGER;
-
 	private final List<Hadith> AHADITH;
-	private final boolean IS_ARABIC;
+	private final DatabasesLogic DATABASES_MANAGER;
+	private final NumberFormatter NUMBER_FORMATTER;
 	private final int TYPE;
 //===================================================
 
-	ResultsAdapter(final DatabasesLogic dbsManager,
-				   final List<Hadith> ahadith, boolean isArabic, int type) {
+	ResultsAdapter(DatabasesLogic dbsManager, List<Hadith> ahadith, boolean isArabic, int type) {
 		AHADITH = ahadith;
 		DATABASES_MANAGER = dbsManager;
-		IS_ARABIC = isArabic;
+		NUMBER_FORMATTER = getNumberFormatter(isArabic);
 		TYPE = type;
 	}
 //===================================================
@@ -62,15 +60,13 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolde
 		final Hadith currentHadith = AHADITH.get(position);
 
 		/*number*/
-		holder.numTextView.setText(IS_ARABIC ?
-				Utils.getArabicNumber(position + 1)
-				: String.valueOf(position + 1));
+		holder.numTextView.setText(NUMBER_FORMATTER.formatNumber(position + 1));
 
 		/*text*/
 		final String text = currentHadith.text();
 		holder.hadithTextView.setText(text);
 
-		/*highlight*/
+		/*highlight text*/
 		WORKERS.execute(holder);
 
 		/*menu*/
@@ -189,5 +185,15 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolde
 		return Snackbar.make(activity.findViewById(R.id.recycler_view),
 				textId,
 				Snackbar.LENGTH_LONG);
+	}
+
+	private NumberFormatter getNumberFormatter(boolean isArabic) {
+		return isArabic ? Utils::getArabicNumber : String::valueOf;
+	}
+
+	private interface NumberFormatter {
+
+		String formatNumber(int number);
+
 	}
 }

@@ -119,7 +119,7 @@ public class ResultsActivity extends BaseActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuItem settings;
 		if (dataType == SAVED)
-			settings = menu.add(R.string.title_activity_settings);
+			settings = menu.add(R.string.preferences);
 
 		else {
 			getMenuInflater().inflate(R.menu.menu_main, menu);

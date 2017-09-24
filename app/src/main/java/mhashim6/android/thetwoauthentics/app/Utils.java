@@ -55,7 +55,7 @@ public final class Utils {
 	private static final String HAMAZAT_REGEX = "[\u0622\u0623\u0625]";
 	private static final String YAA_REGEX = "[\u0649\uFEEF\uFEF0\u06CC]";
 	private static final String QUOTES_REGEX = "([^\"]\\S*|\".+?\")\\s*";
-
+	private static final Pattern QUOTES_PATTERN = Pattern.compile(QUOTES_REGEX);
 	private static final String ARABIC_ALEF = String.valueOf((char) Integer.parseInt("0627", 16));
 	private static final String ARABIC_YAA = String.valueOf((char) Integer.parseInt("064A", 16));
 //	private static final String HAA = String.valueOf((char) Integer.parseInt("0647", 16));
@@ -103,7 +103,7 @@ public final class Utils {
 
 	public static String[] splitQuery(String query) {
 		List<String> tokens = new ArrayList<>();
-		Matcher m = Pattern.compile(QUOTES_REGEX).matcher(query);
+		Matcher m = QUOTES_PATTERN.matcher(query);
 		while (m.find())
 			tokens.add(m.group(1).replace(QUOTE, EMPTY_STRING));
 
@@ -139,7 +139,6 @@ public final class Utils {
 		ClipData clip = ClipData.newPlainText(HADITH_LABEL, formatHadith(context, hadith));
 		if (clipboard != null)
 			clipboard.setPrimaryClip(clip);
-
 	}
 //===================================================
 

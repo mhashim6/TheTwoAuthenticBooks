@@ -10,7 +10,7 @@
 
 	<item
 		android:id="@+id/settings_item"
-		android:title="@string/title_activity_settings"
+		android:title="@string/preferences"
 		app:showAsAction="never"/>
 
 </menu>

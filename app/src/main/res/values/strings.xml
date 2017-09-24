@@ -22,7 +22,7 @@
 	<string name="update_advice">A newer version for the application is available.</string>
 	<string name="update_now">Update now</string>
 	<string name="update_later">Later</string>
-	<string name="title_activity_settings">Preferences</string>
+	<string name="preferences">Preferences</string>
 	<string name="appearance">Appearance</string>
 	<string name="general">General</string>
 	<string name="force_arabic">Arabic Mode</string>
