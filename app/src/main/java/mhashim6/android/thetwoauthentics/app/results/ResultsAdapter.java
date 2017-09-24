@@ -1,9 +1,9 @@
 package mhashim6.android.thetwoauthentics.app.results;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.SystemClock;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
@@ -33,14 +33,14 @@ import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.MAIN
 class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolder> {
 
 	private final List<Hadith> AHADITH;
-	private final DatabasesLogic DATABASES_MANAGER;
+	private final DatabasesLogic DATABASES_LOGIC;
 	private final NumberFormatter NUMBER_FORMATTER;
 	private final int TYPE;
 //===================================================
 
-	ResultsAdapter(DatabasesLogic dbsManager, List<Hadith> ahadith, boolean isArabic, int type) {
+	ResultsAdapter(DatabasesLogic dbLogic, List<Hadith> ahadith, boolean isArabic, int type) {
 		AHADITH = ahadith;
-		DATABASES_MANAGER = dbsManager;
+		DATABASES_LOGIC = dbLogic;
 		NUMBER_FORMATTER = getNumberFormatter(isArabic);
 		TYPE = type;
 	}
@@ -98,7 +98,7 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolde
 //===================================================
 
 		@Override
-		public void run() { //runnable to highlight text in a WORKERS' thread.
+		public void run() { //runnable to highlight text.
 			final int position = getAdapterPosition();
 			final Hadith currentHadith = AHADITH.get(position);
 			final String text = currentHadith.text();
@@ -159,8 +159,10 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolde
 		}
 
 		private void saveHadith(Context context, Hadith hadith) {
-			WORKERS.execute(() -> DATABASES_MANAGER.saveHadith(hadith));
-			makeSnackBar((ResultsActivity) context, R.string.saved).show();
+			WORKERS.execute(() -> {
+				DATABASES_LOGIC.saveHadith(hadith);
+				makeSnackBar((ResultsActivity) context, R.string.saved).show();
+			});
 		}
 
 		private void removeHadith(Context context, Hadith hadith, int position) {
@@ -175,13 +177,13 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolde
 						AHADITH.remove(position);
 						notifyItemRemoved(position);
 						notifyItemRangeChanged(position, getItemCount());
-						WORKERS.execute(() -> DATABASES_MANAGER.removeSavedHadith(hadith));
+						WORKERS.execute(() -> DATABASES_LOGIC.removeSavedHadith(hadith));
 					}).show();
 		}
 	}
 //===================================================
 
-	private static Snackbar makeSnackBar(AppCompatActivity activity, int textId) {
+	private static Snackbar makeSnackBar(Activity activity, int textId) {
 		return Snackbar.make(activity.findViewById(R.id.recycler_view),
 				textId,
 				Snackbar.LENGTH_LONG);
