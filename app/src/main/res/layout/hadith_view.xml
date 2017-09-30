@@ -35,7 +35,6 @@
 			android:background="@color/colorAccent"
 			android:paddingLeft="2dp"
 			android:paddingRight="2dp"
-			android:textColor="@color/colorPrimaryDark"
 			android:textSize="18sp"
 			tools:text="15"/>
 

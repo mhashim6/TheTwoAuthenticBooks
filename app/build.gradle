@@ -7,8 +7,8 @@ android {
         applicationId "mhashim6.android.thetwoauthentics"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 26
-        versionName "1.9.8.4"
+        versionCode 27
+        versionName "1.9.8.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         resConfigs "en", "ar"
@@ -19,7 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled true
+            minifyEnabled false
         }
     }
     compileOptions {

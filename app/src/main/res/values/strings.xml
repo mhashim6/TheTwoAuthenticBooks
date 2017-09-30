@@ -1,6 +1,6 @@
 <resources>
 	<string name="app_name" translatable="false">الصحيحان</string>
-	<string name="search_hint_text">Search…</string>
+	<string name="search_hint_text">Search in Albukhari &amp; Muslim…</string>
 	<string name="saved_title">Saved Hadiths</string>
 	<string name="share_with">Share Hadith</string>
 	<string name="sahih_muslim">Sahih Muslim</string>
@@ -15,9 +15,9 @@
 	<string name="save">Save</string>
 	<string name="remove">Remove</string>
 	<string name="about">About Application</string>
-	<string name="xda" translatable="false">SUPPORT AND HELP FORUM</string>
-	<string name="licenses" translatable="false">OPEN SOURCE LIBRARIES</string>
-	<string name="copyright" translatable="false">COPYRIGHT © 2017 Muhammad Hashim(mhashim6)</string>
+	<string name="xda">SUPPORT AND HELP FORUM</string>
+	<string name="licenses">OPEN SOURCE LIBRARIES</string>
+	<string name="copyright" translatable="false">Developed by Muhammad Hashim(mhashim6)</string>
 	<string name="update_available">Update Available</string>
 	<string name="update_advice">A newer version for the application is available.</string>
 	<string name="update_now">Update now</string>
@@ -28,7 +28,7 @@
 	<string name="force_arabic">Arabic Mode</string>
 	<string name="empty_saved">You haven\'t saved any Hadith, yet.</string>
 	<string name="language_summary">User Interface will always use Arabic language</string>
-	<string name="donate" translatable="false">donate</string>
+	<string name="donate">donate</string>
 	<string name="thanks">Thanks</string>
 	<string name="update_preference">Check for Updates</string>
 	<string name="trim_summary">Automatically trims extra spaces from the query</string>
@@ -46,6 +46,6 @@
 If you like this app, please Share it with your friends, spend a minute to write a nice review or to give it a 5-star rating in Google Play. May Allah reward us all. </string>
 	<string name="rate_dialog_ok">Rate Now</string>
 	<string name="rate_dialog_cancel">Later</string>
-	<string name="rate_dialog_no">No, Thanks</string>
-	<string name="search_guide">- Search for multiple words and phrases by any order.\n\n- Search for exact phrases using quotes \"\".\n\n- Sahih Al-Bukhari contains 7008 Hadiths.\n\n- Sahih Muslim contains 5362 Hadiths.</string>
+	<string name="rate_dialog_no">Never</string>
+	<string name="search_guide">• Search for multiple words and phrases by any order.\n\n• Surround exact phrases with double quotes \"\".\n\n• Sahih Al-Bukhari contains 7008 Hadiths.\n\n• Sahih Muslim contains 5362 Hadiths.</string>
 </resources>

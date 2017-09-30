@@ -59,42 +59,41 @@ public class DatabasesLogic {
 //===================================================
 
 	public final ResultsWrapper getSavedAhadith() {
-		int[] savedNumbers = savedAccess.getAllSavedAhadithIndexes();
-		if (savedNumbers.length == 0) return ResultsHolder.EMPTY_RESULTS;
+		int[] savedIndexes = savedAccess.getAllSavedAhadithIndexes();
+		if (savedIndexes.length == 0) return ResultsHolder.EMPTY_RESULTS;
 
-		ArrayList<Integer> bukhariSaved = new ArrayList<>();
-		ArrayList<Integer> muslimSaved = new ArrayList<>();
+		ArrayList<Integer> bukhariIndexes = new ArrayList<>();
+		ArrayList<Integer> muslimIndexes = new ArrayList<>();
 
-		for (int number : savedNumbers)
-			if (number > 0)
-				bukhariSaved.add(number);
+		for (int index : savedIndexes)
+			if (index > 0)
+				bukhariIndexes.add(index);
 			else
-				muslimSaved.add(-number);
+				muslimIndexes.add(-index);
 
-		return loadSavedAhadithFromNums(bukhariSaved, muslimSaved);
+		return loadSavedHadithsFromIndexes(bukhariIndexes, muslimIndexes);
 	}
 
-	private ResultsWrapper loadSavedAhadithFromNums(List<Integer> bukhariSaved, List<Integer> muslimSaved) {
+	private ResultsWrapper loadSavedHadithsFromIndexes(List<Integer> bukhariIndexes, List<Integer> muslimIndexes) {
 		final List<Hadith> bukhari = new ArrayList<>();
 		final List<Hadith> muslim = new ArrayList<>();
 
 		try {
 			Future<List<Hadith>> bukhariFuture = WORKERS.submit(
-					new SavedCallable(ALBUKHARI, bukhariSaved));
+					new SavedCallable(ALBUKHARI, bukhariIndexes));
 
 			Future<List<Hadith>> muslimFuture = WORKERS.submit(
-					new SavedCallable(MUSLIM, muslimSaved));
+					new SavedCallable(MUSLIM, muslimIndexes));
 
 			bukhari.addAll(bukhariFuture.get());
 			muslim.addAll(muslimFuture.get());
 
 		} catch (InterruptedException | ExecutionException e) {
 			//unlikely
-		} finally {
-			ResultsWrapper saved = new ResultsWrapper(bukhari, muslim, null, NO_SEARCH_TYPE);
-			ResultsHolder.getInstance().setSaved(saved);
-			return saved;
 		}
+		ResultsWrapper saved = new ResultsWrapper(bukhari, muslim, null, NO_SEARCH_TYPE);
+		ResultsHolder.getInstance().setSaved(saved);
+		return saved;
 	}
 
 	public final void saveHadith(Hadith hadith) {
@@ -125,13 +124,10 @@ public class DatabasesLogic {
 			bukhari.addAll(bukhariFuture.get());
 			muslim.addAll(muslimFuture.get());
 
-		} catch (InterruptedException e) {
-			//unlikely
-		} catch (ExecutionException e) {
+		} catch (InterruptedException | ExecutionException e) {
 			//unlikely
 		}
-
-		final String finalQuery = query;
+		final String[] finalQuery = Utils.splitQuery(query);
 		ResultsWrapper results = new ResultsWrapper(bukhari, muslim, finalQuery, ResultsWrapper.SEARCH);
 		ResultsHolder.getInstance().setResults(results);
 		return results;

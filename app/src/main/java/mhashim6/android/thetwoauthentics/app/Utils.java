@@ -70,7 +70,7 @@ public final class Utils {
 	private static final String WHITE_SPACE = " ";
 	private static final String MULTIPLE_SPACES = " +";
 	private static final String PLUS_SIGN = "+";
-	//private static final String SLASH = "/ ";
+	private static final String SLASH = " | ";
 	private static final String CURLY_START = "{";
 	private static final String CURLY_END = "}";
 	private static final String QUOTE = "\"";
@@ -121,8 +121,20 @@ public final class Utils {
 	}
 
 	/*public static String replaceSpacesWithSlash(String query) {
-		return query.trim().replaceAll(MULTIPLE_SPACES, SLASH);
+		return query == null? null : query.trim().replaceAll(MULTIPLE_SPACES, SLASH);
 	}*/
+
+	public static String joinQuery(String[] query) {
+		if (query == null)
+			return null;
+
+		StringBuilder sb = new StringBuilder();
+		for (String token : query)
+			sb.append(token).append(SLASH);
+
+		int length = sb.length();
+		return sb.delete(length - 2, length).toString();
+	}
 
 	/*public static String removeQuotes(String query) {
 		return query.trim().replace(QUOTE, EMPTY_STRING);

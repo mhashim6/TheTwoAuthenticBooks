@@ -84,7 +84,6 @@ public abstract class AbstractMuhaddith implements Muhaddith {
 		cursor.close();
 		return Arrays.asList(ahadith);
 	}
-
 //===================================================
 
 	private static String convertStringKeysToSQL(String[] keys) {
