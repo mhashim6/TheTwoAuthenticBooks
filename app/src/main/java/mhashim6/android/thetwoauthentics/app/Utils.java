@@ -78,7 +78,7 @@ public final class Utils {
 
 	//	private static final int HIGHLIGHT_COLOR = Color.parseColor("#a9473f");
 	private static final int QURAN_HIGHLIGHT_COLOR = Color.parseColor("#616161");
-	private static final int PRIMARY_COLOR = Color.parseColor("#751818");
+	private static final int PRIMARY_COLOR = Color.parseColor("#8E2E30");
 //===================================================
 
 	static final String APP_LINK = "https://play.google.com/store/apps/details?id=mhashim6.android.thetwoauthentics";
