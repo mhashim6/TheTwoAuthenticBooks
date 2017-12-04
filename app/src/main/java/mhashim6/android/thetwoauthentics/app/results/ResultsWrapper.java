@@ -18,10 +18,10 @@ public class ResultsWrapper {
 //===================================================
 
 	private final List<Hadith> bukhari, muslim;
-	private final String[] query;
+	private final String query;
 	private final int searchType;
 
-	public ResultsWrapper(List<Hadith> bukhari, List<Hadith> muslim, @Nullable String[] query, int searchType) {
+	public ResultsWrapper(List<Hadith> bukhari, List<Hadith> muslim, @Nullable String query, int searchType) {
 		this.bukhari = bukhari;
 		this.muslim = muslim;
 		this.query = query;
@@ -36,7 +36,7 @@ public class ResultsWrapper {
 		return muslim == null ? Collections.emptyList() : muslim;
 	}
 
-	public String[] query() {
+	public String query() {
 		return query;
 	}
 

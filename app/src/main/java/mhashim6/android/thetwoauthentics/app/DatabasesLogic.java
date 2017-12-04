@@ -127,7 +127,7 @@ public class DatabasesLogic {
 		} catch (InterruptedException | ExecutionException e) {
 			//unlikely
 		}
-		final String[] finalQuery = Utils.splitQuery(query);
+		final String finalQuery = Utils.joinQuery(Utils.splitQuery(query));
 		ResultsWrapper results = new ResultsWrapper(bukhari, muslim, finalQuery, ResultsWrapper.SEARCH);
 		ResultsHolder.getInstance().setResults(results);
 		return results;

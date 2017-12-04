@@ -66,11 +66,11 @@ public class ResultsActivity extends BaseActivity {
 		checkForTraitors();
 
 		String title = null;
-		String[] query = resultsWrapper.query();
+		String query = resultsWrapper.query();
 
 		switch (resultsWrapper.searchType()) {
 			case ResultsWrapper.SEARCH:
-				title = Utils.joinQuery(query);
+				title = query;
 				break;
 
 			case ResultsWrapper.NO_SEARCH_TYPE:
