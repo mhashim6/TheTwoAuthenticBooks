@@ -41,7 +41,7 @@ public class AboutActivity extends BaseActivity {
 //===================================================
 
 	private void initButtons() {
-		AppCompatButton xda, credits, donate;
+		AppCompatButton xda, credits, developer, donate;
 		xda = findViewById(R.id.xda_btn);
 		xda.setOnClickListener(v -> openWebPage("https://forum.xda-developers.com/android/apps-games/app-al-sahihan-albukhari-muslim-t3640212"));
 
@@ -53,6 +53,9 @@ public class AboutActivity extends BaseActivity {
 			Toast.makeText(AboutActivity.this, R.string.thanks, Toast.LENGTH_LONG).show();
 			openWebPage("https://www.paypal.me/mhashim6");
 		});
+
+		developer = findViewById(R.id.developer_btn);
+		developer.setOnClickListener(v -> openWebPage("https://github.com/mhashim6"));
 
 	}
 //===================================================
@@ -80,7 +83,6 @@ public class AboutActivity extends BaseActivity {
 //===================================================
 
 	public final void openWebPage(String url) {
-		Intent googleSearchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		startActivity(googleSearchIntent);
+		Utils.openWebPage(this, Uri.parse(url));
 	}
 }

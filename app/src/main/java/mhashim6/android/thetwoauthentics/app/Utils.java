@@ -183,16 +183,21 @@ public final class Utils {
 //===================================================
 
 	public static void webSearchQuery(Context context, String query) {
-		customTabsIntent.launchUrl(context, Uri.parse(SUNNAH + query));
+		openWebPage(context, Uri.parse(SUNNAH + query));
 	}
 
 	public static void webSearchHadith(Context context, Hadith hadith) {
-		customTabsIntent.launchUrl(context, WebSearch.getSearchUri(hadith, GOOGLE));
+		openWebPage(context, WebSearch.getSearchUri(hadith, GOOGLE));
 	}
 
 	/*public final void webTranslateHadith(Context context, Hadith hadith) {
 		customTabsIntent.launchUrl(context, WebSearch.getSearchUri(hadith, SUNNAH));
 	}*/
+
+	public static void openWebPage(Context context, Uri uri) {
+		customTabsIntent.launchUrl(context, uri);
+	}
+
 //===================================================
 
 	private static String formatHadith(Context context, Hadith hadith) {

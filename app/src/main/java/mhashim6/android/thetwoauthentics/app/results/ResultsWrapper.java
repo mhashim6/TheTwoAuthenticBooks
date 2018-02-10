@@ -28,28 +28,28 @@ public class ResultsWrapper {
 		this.searchType = searchType;
 	}
 
-	public List<Hadith> bukhariData() {
+	List<Hadith> bukhariList() {
 		return bukhari == null ? Collections.emptyList() : bukhari;
 	}
 
-	public List<Hadith> muslimData() {
+	List<Hadith> muslimList() {
 		return muslim == null ? Collections.emptyList() : muslim;
 	}
 
-	public String query() {
+	String query() {
 		return query;
 	}
 
-	public int searchType() {
+	int searchType() {
 		return searchType;
 	}
 
 	public int number() {
-		return bukhariData().size() + muslimData().size();
+		return bukhariList().size() + muslimList().size();
 	}
 
 	public boolean isEmpty() {
-		return bukhariData().isEmpty() && muslimData().isEmpty();
+		return bukhariList().isEmpty() && muslimList().isEmpty();
 	}
 
 

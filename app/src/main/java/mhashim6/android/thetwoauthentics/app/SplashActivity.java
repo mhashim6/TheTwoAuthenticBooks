@@ -1,17 +1,18 @@
 package mhashim6.android.thetwoauthentics.app;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import static mhashim6.android.thetwoauthentics.app.Utils.WORKERS;
 
 public class SplashActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	//	onFirstRun(); //TODO
-		new OpenDbTask().execute(null, null, null);
+		//	onFirstRun(); //TODO
+		openDB();
 	}
 
 	/*private void onFirstRun() {
@@ -22,18 +23,13 @@ public class SplashActivity extends AppCompatActivity {
 		}
 	}*/
 
-	private final class OpenDbTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected Void doInBackground(Void... params) {
+	private void openDB() {
+		WORKERS.submit(() -> {
 			DatabasesLogic.getInstance(SplashActivity.this);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-			startActivity(intent);
-		}
+			runOnUiThread(() -> {
+				Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+				startActivity(intent);
+			});
+		});
 	}
-
 }

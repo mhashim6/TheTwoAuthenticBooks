@@ -35,8 +35,7 @@
 		</activity>
 
 		<activity
-			android:name=".app.results.ResultsActivity"
-			>
+			android:name=".app.results.ResultsActivity">
 		</activity>
 
 		<activity android:name=".app.AboutActivity">

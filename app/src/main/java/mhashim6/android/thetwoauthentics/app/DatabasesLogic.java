@@ -105,7 +105,7 @@ public class DatabasesLogic {
 	}
 //===================================================
 
-	public final ResultsWrapper search(String query, int limit) {
+	final ResultsWrapper search(String query, int limit) {
 
 		query = Utils.cleanQuery(query);
 		String queryToSearch = Utils.formatQuery(query);

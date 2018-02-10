@@ -40,41 +40,52 @@
 	</LinearLayout>
 
 
-		<LinearLayout
-			xmlns:android="http://schemas.android.com/apk/res/android"
-			android:layout_width="match_parent"
+	<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:orientation="vertical"
+		android:paddingBottom="10dp"
+		android:paddingTop="10dp">
+
+		<android.support.v7.widget.AppCompatButton
+			android:id="@+id/xda_btn"
+			android:layout_width="250dp"
 			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:paddingBottom="10dp"
-			android:layout_gravity="center"
-			android:gravity="center"
-			android:paddingTop="10dp">
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:text="@string/xda"/>
 
-			<android.support.v7.widget.AppCompatButton
-				android:id="@+id/xda_btn"
-				android:layout_width="250dp"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="10dp"
-				android:layout_marginRight="10dp"
-				android:text="@string/xda"/>
+		<android.support.v7.widget.AppCompatButton
+			android:id="@+id/credits_btn"
+			android:layout_width="250dp"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:text="@string/licenses"
+			/>
 
-			<android.support.v7.widget.AppCompatButton
-				android:id="@+id/credits_btn"
-				android:layout_width="250dp"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="10dp"
-				android:layout_marginRight="10dp"
-				android:text="@string/licenses"
-				/>
-			<android.support.v7.widget.AppCompatButton
-				android:id="@+id/donate_btn"
-				android:layout_width="250dp"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="10dp"
-				android:layout_marginRight="10dp"
-				android:text="@string/donate"
-				/>
-		</LinearLayout>
+		<android.support.v7.widget.AppCompatButton
+			android:id="@+id/developer_btn"
+			android:layout_width="250dp"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:text="@string/developer"
+			/>
+
+		<android.support.v7.widget.AppCompatButton
+			android:id="@+id/donate_btn"
+			android:layout_width="250dp"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:text="@string/donate"
+			/>
+
+	</LinearLayout>
 
 
 	<android.support.v7.widget.AppCompatTextView

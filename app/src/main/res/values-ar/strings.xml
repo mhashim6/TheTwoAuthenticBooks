@@ -45,5 +45,7 @@
 	<string name="search_guide">• للبحث عن نصوص مطابقة ضعها بين علامتي تنصيص \"\".\n\n• ابحث عن أي عدد من الكلمات أو النصوص بأي ترتيب.\n\n• عدد الأحاديث في صحيح البخاري ٧٠٠٨ حديث.\n\n• عدد الأحاديث في صحيح مسلم ٥٣٦٢ حديث.</string>
 	<string name="xda" >موقع التطبيق</string>
 	<string name="licenses">المكتبات المستخدمة</string>
-	<string name="donate">تبرع للتطبيق</string>
+	<string name="donate">ادعم التطبيق</string>
+	<string name="developer">المطور</string>
+
 </resources>

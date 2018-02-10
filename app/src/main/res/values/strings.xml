@@ -17,7 +17,7 @@
 	<string name="about">About Application</string>
 	<string name="xda">SUPPORT AND HELP FORUM</string>
 	<string name="licenses">OPEN SOURCE LIBRARIES</string>
-	<string name="copyright" translatable="false">Developed by Muhammad Hashim(mhashim6)</string>
+	<string name="copyright" translatable="false">Developed by Muhammad Hashim (mhashim6)</string>
 	<string name="update_available">Update Available</string>
 	<string name="update_advice">A newer version for the application is available.</string>
 	<string name="update_now">Update now</string>
@@ -48,4 +48,5 @@ If you like this app, please Share it with your friends, spend a minute to write
 	<string name="rate_dialog_cancel">Later</string>
 	<string name="rate_dialog_no">Never</string>
 	<string name="search_guide">• Search for multiple words and phrases by any order.\n\n• Surround exact phrases with double quotes \"\".\n\n• Sahih Al-Bukhari contains 7008 Hadiths.\n\n• Sahih Muslim contains 5362 Hadiths.</string>
+	<string name="developer">Developer</string>
 </resources>

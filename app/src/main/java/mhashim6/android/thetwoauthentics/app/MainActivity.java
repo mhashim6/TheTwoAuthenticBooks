@@ -3,7 +3,6 @@ package mhashim6.android.thetwoauthentics.app;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
@@ -22,6 +21,7 @@ import com.github.javiersantos.appupdater.enums.UpdateFrom;
 import mhashim6.android.thetwoauthentics.R;
 import mhashim6.android.thetwoauthentics.app.results.ResultsWrapper;
 
+import static mhashim6.android.thetwoauthentics.app.Utils.WORKERS;
 import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.RESULTS;
 import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.SAVED;
 
@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
 
 		MenuItem saved = menu.findItem(R.id.saved_item);
 		saved.setOnMenuItemClickListener(item -> {
-			new SavedTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+			startSavedActivity();
 			return true;
 		});
 		return super.onCreateOptionsMenu(menu);
@@ -126,19 +126,26 @@ public class MainActivity extends BaseActivity {
 	}
 //===================================================
 
-	private void initSaved() {
-		ResultsWrapper saved = databasesLogic.getSavedAhadith();
-		if (!saved.isEmpty())
-			Utils.startResultsActivity(MainActivity.this, SAVED);
-		else
-			makeSnackBar(R.string.empty_saved).show();
+	private void startSavedActivity() {
+		progressBar.setVisibility(View.VISIBLE);
+		WORKERS.submit(() -> {
+			ResultsWrapper saved = databasesLogic.getSavedAhadith();
+
+			runOnUiThread(() -> {
+				progressBar.setVisibility(View.GONE);
+
+				if (!saved.isEmpty())
+					Utils.startResultsActivity(MainActivity.this, SAVED);
+				else
+					makeSnackBar(R.string.empty_saved).show();
+			});
+		});
 	}
 //===================================================
 
 	private void searchInBackground(String query) {
-		if (!"".equals(query.trim())) {
-			new SearchTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, query);
-		}
+		if (!"".equals(query.trim()))
+			search(query);
 	}
 //===================================================
 
@@ -160,61 +167,30 @@ public class MainActivity extends BaseActivity {
 	}
 //===================================================
 
-	private class SearchTask extends AsyncTask<String, Void, Void> {
+	private void search(final String query) {
 
-		@Override
-		protected void onPreExecute() {
-			hideKeyboard();
-			searchBtn.setEnabled(false);
-			progressBar.setVisibility(View.VISIBLE);
-		}
-
-		@Override
-		protected Void doInBackground(String... params) {
-			search(params[0]);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			searchBtn.setEnabled(true);
-			progressBar.setVisibility(View.INVISIBLE);
-		}
-//===================================================
-
-		private void search(final String query) {
+		hideKeyboard();
+		searchBtn.setEnabled(false);
+		progressBar.setVisibility(View.VISIBLE);
+		WORKERS.submit(() -> {
 			lastQuery = query;
 
 			ResultsWrapper results = databasesLogic.search(query, limit);
-			if (!results.isEmpty())
-				Utils.startResultsActivity(MainActivity.this, RESULTS);
-			else
-				yellAtUser();
-		}
+			runOnUiThread(() -> {
+				if (!results.isEmpty())
+					Utils.startResultsActivity(MainActivity.this, RESULTS);
+				else
+					yellAtUser();
 
-		private void yellAtUser() {
-			Snackbar sb = makeSnackBar(getResources().getString(R.string.no_results));
-			sb.setAction(R.string.sunnah_search, v -> Utils.webSearchQuery(MainActivity.this, lastQuery));
-			sb.show();
-		}
+				searchBtn.setEnabled(true);
+				progressBar.setVisibility(View.INVISIBLE);
+			});
+		});
 	}
 
-	private class SavedTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected void onPreExecute() {
-
-			progressBar.setVisibility(View.VISIBLE);
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			initSaved();
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			progressBar.setVisibility(View.INVISIBLE);
-		}
+	private void yellAtUser() {
+		Snackbar sb = makeSnackBar(getResources().getString(R.string.no_results));
+		sb.setAction(R.string.sunnah_search, v -> Utils.webSearchQuery(MainActivity.this, lastQuery));
+		sb.show();
 	}
 }

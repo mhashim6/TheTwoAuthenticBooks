@@ -7,8 +7,8 @@ android {
         applicationId "mhashim6.android.thetwoauthentics"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 29
-        versionName "1.9.9.2"
+        versionCode 30
+        versionName "1.9.9.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         resConfigs "en", "ar"

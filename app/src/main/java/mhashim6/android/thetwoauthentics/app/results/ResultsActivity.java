@@ -1,7 +1,6 @@
 package mhashim6.android.thetwoauthentics.app.results;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -27,8 +26,7 @@ import mhashim6.android.thetwoauthentics.app.DatabasesLogic;
 import mhashim6.android.thetwoauthentics.app.SettingsActivity;
 import mhashim6.android.thetwoauthentics.app.Utils;
 
-import static mhashim6.android.thetwoauthentics.model.Muhaddith.ALBUKHARI;
-import static mhashim6.android.thetwoauthentics.model.Muhaddith.MUSLIM;
+import static mhashim6.android.thetwoauthentics.app.Utils.WORKERS;
 
 
 public class ResultsActivity extends BaseActivity {
@@ -86,6 +84,38 @@ public class ResultsActivity extends BaseActivity {
 	}
 //==================================================
 
+	private void initTabs() {
+		TabLayout tabLayout;
+		ViewPager viewPager = findViewById(R.id.viewpager);
+		initViewPager(viewPager);
+		tabLayout = findViewById(R.id.tabs);
+		tabLayout.setupWithViewPager(viewPager);
+	}
+
+	private void initViewPager(ViewPager viewPager) {
+		ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+		boolean isArabic = isArabic();
+
+		if (!resultsWrapper.bukhariList().isEmpty()) {
+			ResultsFragment albukhariFragment = new ResultsFragment();
+			albukhariFragment.setAdapter(new ResultsAdapter(DatabasesLogic.getInstance(this),
+					resultsWrapper.bukhariList(), isArabic, dataType));
+
+			pagerAdapter.addFragment(albukhariFragment, getResources().getString(R.string.sahih_albukhari));
+		}
+
+		if (!resultsWrapper.muslimList().isEmpty()) {
+			ResultsFragment muslimFragment = new ResultsFragment();
+			muslimFragment.setAdapter(new ResultsAdapter(DatabasesLogic.getInstance(this),
+					resultsWrapper.muslimList(), isArabic, dataType));
+
+			pagerAdapter.addFragment(muslimFragment, getResources().getString(R.string.sahih_muslim));
+		}
+
+		viewPager.setAdapter(pagerAdapter);
+	}
+//==================================================
+
 	private void showNumber() {
 		if (dataType == RESULTS)
 			MAIN_THREAD.postDelayed(() -> {
@@ -106,15 +136,6 @@ public class ResultsActivity extends BaseActivity {
 	}
 //===================================================
 
-	private void initTabs() {
-		TabLayout tabLayout;
-		ViewPager viewPager = findViewById(R.id.viewpager);
-		initViewPager(viewPager);
-		tabLayout = findViewById(R.id.tabs);
-		tabLayout.setupWithViewPager(viewPager);
-	}
-//===================================================
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuItem settings;
@@ -127,7 +148,7 @@ public class ResultsActivity extends BaseActivity {
 
 			MenuItem saved = menu.findItem(R.id.saved_item);
 			saved.setOnMenuItemClickListener(item -> {
-				new SavedTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null, null, null);
+				startSavedActivity();
 				return true;
 			});
 			settings = menu.findItem(R.id.settings_item);
@@ -157,12 +178,20 @@ public class ResultsActivity extends BaseActivity {
 	}
 //===================================================
 
-	private void initSaved() {
-		ResultsWrapper saved = DatabasesLogic.getInstance(this).getSavedAhadith();
-		if (!saved.isEmpty())
-			Utils.startResultsActivity(ResultsActivity.this, SAVED);
-		else
-			showSnackBar(R.string.empty_saved);
+	private void startSavedActivity() {
+		progressBar.setVisibility(View.VISIBLE);
+		WORKERS.submit(() -> {
+			ResultsWrapper saved = DatabasesLogic.getInstance(this).getSavedAhadith();
+
+			runOnUiThread(() -> {
+				progressBar.setVisibility(View.GONE);
+
+				if (!saved.isEmpty())
+					Utils.startResultsActivity(ResultsActivity.this, SAVED);
+				else
+					showSnackBar(R.string.empty_saved);
+			});
+		});
 	}
 //===================================================
 
@@ -176,33 +205,6 @@ public class ResultsActivity extends BaseActivity {
 				Snackbar.LENGTH_LONG).show();
 	}
 //===================================================
-
-	private void initViewPager(ViewPager viewPager) {
-		ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-		boolean isArabic = isArabic();
-
-		if (!resultsWrapper.bukhariData().isEmpty()) {
-			ResultsFragment albukhariFragment = new ResultsFragment();
-			Bundle albukhariArgs = new Bundle();
-			albukhariArgs.putInt(ResultsFragment.MUHADDITH_KEY, ALBUKHARI);
-			albukhariArgs.putInt(RESULTS_TYPE_KEY, dataType);
-			albukhariArgs.putBoolean(ResultsFragment.ARABIC_KEY, isArabic);
-			albukhariFragment.setArguments(albukhariArgs);
-			adapter.addFragment(albukhariFragment, getResources().getString(R.string.sahih_albukhari));
-		}
-
-		if (!resultsWrapper.muslimData().isEmpty()) {
-			ResultsFragment muslimFragment = new ResultsFragment();
-			Bundle muslimArgs = new Bundle();
-			muslimArgs.putInt(ResultsFragment.MUHADDITH_KEY, MUSLIM);
-			muslimArgs.putInt(RESULTS_TYPE_KEY, dataType);
-			muslimArgs.putBoolean(ResultsFragment.ARABIC_KEY, isArabic);
-			muslimFragment.setArguments(muslimArgs);
-			adapter.addFragment(muslimFragment, getResources().getString(R.string.sahih_muslim));
-		}
-		viewPager.setAdapter(adapter);
-	}
-//==================================================
 
 	private boolean isArabic() {
 		return PreferenceManager.getDefaultSharedPreferences(this).getBoolean("arabic_key", false) ||
@@ -236,24 +238,6 @@ public class ResultsActivity extends BaseActivity {
 		@Override
 		public CharSequence getPageTitle(int position) {
 			return mFragmentTitleList.get(position);
-		}
-	}
-
-	private class SavedTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected void onPreExecute() {
-			progressBar.setVisibility(View.VISIBLE);
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			initSaved();
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			progressBar.setVisibility(View.INVISIBLE);
 		}
 	}
 }
