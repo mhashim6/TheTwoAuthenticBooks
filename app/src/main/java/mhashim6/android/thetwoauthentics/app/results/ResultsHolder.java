@@ -1,7 +1,7 @@
 package mhashim6.android.thetwoauthentics.app.results;
 
 
-import static mhashim6.android.thetwoauthentics.app.results.ResultsWrapper.NO_SEARCH_TYPE;
+import static mhashim6.android.thetwoauthentics.app.results.ResultsWrapper.SAVED;
 
 
 /**
@@ -14,7 +14,7 @@ public class ResultsHolder {
 
 	private ResultsWrapper results, saved;
 	public static final ResultsWrapper EMPTY_RESULTS =
-			new ResultsWrapper(null, null, null, NO_SEARCH_TYPE);
+			new ResultsWrapper(null, null, null, SAVED);
 
 	private ResultsHolder() {
 

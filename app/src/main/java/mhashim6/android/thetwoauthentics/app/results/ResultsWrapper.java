@@ -14,18 +14,18 @@ import mhashim6.android.thetwoauthentics.model.Hadith;
 public class ResultsWrapper {
 
 	public static final int SEARCH = 7;
-	public static final int NO_SEARCH_TYPE = -27;
+	public static final int SAVED = -27;
 //===================================================
 
 	private final List<Hadith> bukhari, muslim;
 	private final String query;
-	private final int searchType;
+	private final int resultsType;
 
-	public ResultsWrapper(List<Hadith> bukhari, List<Hadith> muslim, @Nullable String query, int searchType) {
+	public ResultsWrapper(List<Hadith> bukhari, List<Hadith> muslim, @Nullable String query, int resultsType) {
 		this.bukhari = bukhari;
 		this.muslim = muslim;
 		this.query = query;
-		this.searchType = searchType;
+		this.resultsType = resultsType;
 	}
 
 	List<Hadith> bukhariList() {
@@ -40,8 +40,8 @@ public class ResultsWrapper {
 		return query;
 	}
 
-	int searchType() {
-		return searchType;
+	int resultsType() {
+		return resultsType;
 	}
 
 	public int number() {
@@ -51,6 +51,5 @@ public class ResultsWrapper {
 	public boolean isEmpty() {
 		return bukhariList().isEmpty() && muslimList().isEmpty();
 	}
-
 
 }

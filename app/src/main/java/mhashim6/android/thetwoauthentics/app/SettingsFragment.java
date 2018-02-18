@@ -19,7 +19,7 @@ public class SettingsFragment extends PreferenceFragment {
 		arabic.setOnPreferenceChangeListener((preference, newValue) -> {
 			boolean currentValue = arabic.isChecked();
 			SharedPreferences.Editor preferencesEditor = (PreferenceManager.getDefaultSharedPreferences(getActivity()).edit());
-			preferencesEditor.putBoolean("arabic_key", !currentValue).commit();
+			preferencesEditor.putBoolean("arabic_key", !currentValue).apply();
 			/*startActivity(new Intent(getActivity(), MainActivity.class));
 			System.exit(0);*/
 			((App) getActivity().getApplication()).initLocale(getActivity());

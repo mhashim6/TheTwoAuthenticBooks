@@ -18,7 +18,7 @@ import mhashim6.android.thetwoauthentics.model.Muslim;
 import mhashim6.android.thetwoauthentics.model.saved.SavedAccess;
 
 import static mhashim6.android.thetwoauthentics.app.Utils.WORKERS;
-import static mhashim6.android.thetwoauthentics.app.results.ResultsWrapper.NO_SEARCH_TYPE;
+import static mhashim6.android.thetwoauthentics.app.results.ResultsWrapper.SAVED;
 
 /**
  * Created by mhashim6 on 12/07/2017.
@@ -91,7 +91,7 @@ public class DatabasesLogic {
 		} catch (InterruptedException | ExecutionException e) {
 			//unlikely
 		}
-		ResultsWrapper saved = new ResultsWrapper(bukhari, muslim, null, NO_SEARCH_TYPE);
+		ResultsWrapper saved = new ResultsWrapper(bukhari, muslim, null, SAVED);
 		ResultsHolder.getInstance().setSaved(saved);
 		return saved;
 	}

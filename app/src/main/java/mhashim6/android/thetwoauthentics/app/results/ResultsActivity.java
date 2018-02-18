@@ -32,7 +32,7 @@ import static mhashim6.android.thetwoauthentics.app.Utils.WORKERS;
 public class ResultsActivity extends BaseActivity {
 
 	public final static String RESULTS_TYPE_KEY = "RESULTS_TYPE_KEY";
-	public static final int RESULTS = 5;
+	public static final int SEARCH = 5;
 	public static final int SAVED = 15;
 //===================================================
 
@@ -59,19 +59,19 @@ public class ResultsActivity extends BaseActivity {
 		ResultsWrapper probableSaved = ResultsHolder.getInstance().getSaved();
 
 		dataType = getIntent().getIntExtra(RESULTS_TYPE_KEY, SAVED);
-		resultsWrapper = (dataType == RESULTS) ? probableResults : probableSaved;
+		resultsWrapper = (dataType == SEARCH) ? probableResults : probableSaved;
 
 		checkForTraitors();
 
 		String title = null;
 		String query = resultsWrapper.query();
 
-		switch (resultsWrapper.searchType()) {
+		switch (resultsWrapper.resultsType()) {
 			case ResultsWrapper.SEARCH:
 				title = query;
 				break;
 
-			case ResultsWrapper.NO_SEARCH_TYPE:
+			case ResultsWrapper.SAVED:
 				title = getResources().getString(R.string.saved_title);
 				break;
 		}
@@ -117,7 +117,7 @@ public class ResultsActivity extends BaseActivity {
 //==================================================
 
 	private void showNumber() {
-		if (dataType == RESULTS)
+		if (dataType == SEARCH)
 			MAIN_THREAD.postDelayed(() -> {
 				int number = resultsWrapper.number();
 				showSnackBar(isArabic() ? Utils.getArabicNumber(number) : String.valueOf(number));

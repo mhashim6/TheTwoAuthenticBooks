@@ -118,7 +118,7 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolde
 			MenuInflater inflater = popup.getMenuInflater();
 			inflater.inflate(R.menu.menu_hadith_options, menu);
 
-			if (TYPE == ResultsActivity.RESULTS)
+			if (TYPE == ResultsActivity.SEARCH)
 				menu.add(Menu.NONE, R.id.save_item, Menu.NONE, R.string.save);
 			else
 				menu.add(Menu.NONE, R.id.remove_item, Menu.NONE, R.string.remove);

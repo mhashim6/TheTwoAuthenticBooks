@@ -22,7 +22,7 @@ import mhashim6.android.thetwoauthentics.R;
 import mhashim6.android.thetwoauthentics.app.results.ResultsWrapper;
 
 import static mhashim6.android.thetwoauthentics.app.Utils.WORKERS;
-import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.RESULTS;
+import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.SEARCH;
 import static mhashim6.android.thetwoauthentics.app.results.ResultsActivity.SAVED;
 
 public class MainActivity extends BaseActivity {
@@ -178,7 +178,7 @@ public class MainActivity extends BaseActivity {
 			ResultsWrapper results = databasesLogic.search(query, limit);
 			runOnUiThread(() -> {
 				if (!results.isEmpty())
-					Utils.startResultsActivity(MainActivity.this, RESULTS);
+					Utils.startResultsActivity(MainActivity.this, SEARCH);
 				else
 					yellAtUser();
 
