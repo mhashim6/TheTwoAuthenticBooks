@@ -1,13 +1,13 @@
 package mhashim6.android.thetwoauthentics.app;
 
 import android.content.Context;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.ProgressBar;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 import mhashim6.android.thetwoauthentics.R;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by mhashim6 on 19/09/2017.
@@ -29,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 	@Override
 	protected void attachBaseContext(Context newBase) {
-		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+		super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+		App.initLocale(this);
 	}
 }

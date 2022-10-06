@@ -3,10 +3,13 @@ package mhashim6.android.thetwoauthentics.app.results;
 import android.app.Activity;
 import android.content.Context;
 import android.os.SystemClock;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.AppCompatImageButton;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.RecyclerView;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -116,12 +119,11 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.HadithViewHolde
 			PopupMenu popup = new PopupMenu(context, view);
 			Menu menu = popup.getMenu();
 			MenuInflater inflater = popup.getMenuInflater();
-			inflater.inflate(R.menu.menu_hadith_options, menu);
 
 			if (TYPE == ResultsActivity.SEARCH)
-				menu.add(Menu.NONE, R.id.save_item, Menu.NONE, R.string.save);
+				inflater.inflate(R.menu.menu_hadith_options, menu);
 			else
-				menu.add(Menu.NONE, R.id.remove_item, Menu.NONE, R.string.remove);
+				inflater.inflate(R.menu.menu_saved_hadith_options, menu);
 
 			popup.setOnMenuItemClickListener(HadithViewHolder.this);
 			popup.show();

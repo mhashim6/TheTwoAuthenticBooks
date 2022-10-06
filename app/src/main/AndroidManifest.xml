@@ -20,7 +20,8 @@
 			android:configChanges="orientation"
 			android:launchMode="singleTop"
 			android:noHistory="true"
-			android:theme="@style/SplashTheme">
+			android:theme="@style/SplashTheme"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
@@ -38,7 +39,8 @@
 			android:name=".app.results.ResultsActivity">
 		</activity>
 
-		<activity android:name=".app.AboutActivity">
+		<activity android:name=".app.AboutActivity"
+			android:exported="true">
 			<intent-filter>
 				<action android:name="alsahihan.about.action"/>
 				<category android:name="android.intent.category.DEFAULT"/>

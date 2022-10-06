@@ -13,7 +13,7 @@
 		layout="@layout/toolbar">
 	</include>
 
-	<android.support.v7.widget.CardView
+	<androidx.cardview.widget.CardView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_gravity="center"
@@ -36,7 +36,7 @@
 				android:orientation="horizontal"
 				>
 
-				<android.support.v7.widget.AppCompatImageButton
+				<androidx.appcompat.widget.AppCompatImageButton
 					android:id="@+id/search_btn"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
 					android:src="@drawable/search_icon_tinted"
 					app:backgroundTint="@android:color/transparent"/>
 
-				<android.support.v7.widget.SearchView
+				<androidx.appcompat.widget.SearchView
 					android:id="@+id/search_view"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
 					/>
 			</LinearLayout>
 
-			<android.support.v7.widget.AppCompatTextView
+			<androidx.appcompat.widget.AppCompatTextView
 				android:id="@+id/guide_textView"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
@@ -67,6 +67,6 @@
 				android:text="@string/search_guide"/>
 
 		</LinearLayout>
-	</android.support.v7.widget.CardView>
+	</androidx.cardview.widget.CardView>
 
 </LinearLayout>

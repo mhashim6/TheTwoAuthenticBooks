@@ -7,12 +7,15 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import java.util.Locale;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 import mhashim6.android.thetwoauthentics.R;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by mhashim6 on 12/07/2017.
@@ -23,13 +26,13 @@ public class App extends Application {
 	public void onCreate() {
 		super.onCreate();
 
-		CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-				.setDefaultFontPath("fonts/calibri.ttf")
-				.setFontAttrId(R.attr.fontPath)
-				.build()
-		);
-
-		initLocale(getApplicationContext());
+		ViewPump.init(ViewPump.builder()
+				.addInterceptor(new CalligraphyInterceptor(
+						new CalligraphyConfig.Builder()
+								.setDefaultFontPath("fonts/calibri.ttf")
+								.setFontAttrId(R.attr.fontPath)
+								.build()))
+				.build());
 
 	/*	Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
 			Log.d("hi", "lol");
@@ -43,16 +46,16 @@ public class App extends Application {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
-		initLocale(getApplicationContext());
+		initLocale(getBaseContext());
 	}
 
-	public void initLocale(@NonNull Context context) {
-		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+	public static void initLocale(@NonNull Context context) {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 		boolean forceArabic = preferences.getBoolean("arabic_key", false);
 
 		final Locale locale;
 		if (forceArabic)
-			locale = new Locale("ar");
+			locale = new Locale("ar", "EG");
 		else
 			locale = Resources.getSystem().getConfiguration().locale;
 
@@ -63,7 +66,7 @@ public class App extends Application {
 		}*/
 	}
 
-	private void setLocale(@NonNull Context context, @NonNull Locale locale) {
+	private static void setLocale(@NonNull Context context, @NonNull Locale locale) {
 		final Resources resources = context.getResources();
 		Configuration config = resources.getConfiguration();
 		config.locale = locale;
